@@ -14,7 +14,8 @@ PYTHON != if (python --version 2>&1 | grep -q 'Python 2\..*'); then \
           fi
 
 # Flags to pass to compiler
-CFLAGS := -O3 -Wall -Wextra -std=c99 -I.
+#CFLAGS := -O3 -Wall -Wextra -std=c99 -I.
+CFLAGS := -g -Wall -Wextra -std=c99 -I.
 
 all:
 	@$(CC) $(CFLAGS) re.c tests/test1.c     -o tests/test1

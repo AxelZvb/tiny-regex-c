@@ -1,0 +1,13 @@
+*.o
+*.expand
+*.pyc
+*.out
+*.gch
+*.project
+*.cproject
+*.settings
+test
+test1
+test2
+test_rand
+test_rand_neg
