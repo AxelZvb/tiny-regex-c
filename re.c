@@ -148,13 +148,30 @@ re_t re_compile(const char *pattern)
             re_compiled[j].type = DOT;
         } break;
         case '*': {
-            re_compiled[j].type = STAR;
+            /* Zero or more instances of the prior matcher */
+            counts[countsidx].min = 0;
+            counts[countsidx].max = 0;
+            /*
+             * Add the change to the prior matcher
+             */
+            re_compiled[--j].counts = &counts[countsidx++];
         } break;
         case '+': {
-            re_compiled[j].type = PLUS;
+            /*
+             * One or more instances of the prior matcher */
+            counts[countsidx].min = 1;
+            counts[countsidx].max = 0;
+            /*
+             * Add the change to the prior matcher
+             */
+            re_compiled[--j].counts = &counts[countsidx++];
         } break;
         case '?': {
-            re_compiled[j].type = QUESTIONMARK;
+            /* Zero or one instances of the prior matcher */
+            counts[countsidx].min = 0;
+            counts[countsidx].max = 1;
+            /* Add the change to the prior matcher */
+            re_compiled[--j].counts = &counts[countsidx++];
         } break;
             /*    case '|': {    re_compiled[j].type = BRANCH;          } break; <--
              * not working properly */
